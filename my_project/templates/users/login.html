@@ -1,0 +1,87 @@
+{% extends "base.html" %} {% load static %} {% block title %}Iniciar Sesión -
+LinguaLeap{% endblock %} {% block content %}
+<div
+  class="flex items-center justify-center min-h-screen bg-background-light dark:bg-background-dark px-4 sm:px-6 lg:px-8 font-display"
+>
+  <div
+    class="w-full max-w-md space-y-8 bg-white dark:bg-background-dark p-8 rounded-xl shadow-lg border border-gray-200/50 dark:border-gray-700/50"
+  >
+    <div class="text-center">
+      <svg
+        class="mx-auto h-10 w-10 text-primary"
+        fill="currentColor"
+        viewBox="0 0 48 48"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M24 4C25.7818 14.2173 33.7827 22.2182 44 24C33.7827 25.7818 25.7818 33.7827 24 44C22.2182 33.7827 14.2173 25.7818 4 24C14.2173 22.2182 22.2182 14.2173 24 4Z"
+        ></path>
+      </svg>
+      <h2 class="mt-6 text-3xl font-extrabold text-gray-900 dark:text-white">
+        Inicia sesión en tu cuenta
+      </h2>
+      <p class="mt-2 text-sm text-gray-600 dark:text-gray-400">
+        ¿No tienes una cuenta?
+        <a
+          href="{% url 'users:signup' %}"
+          class="font-medium text-primary hover:text-primary/90 transition"
+        >
+          Regístrate aquí
+        </a>
+      </p>
+    </div>
+
+    <form method="POST" class="space-y-6">
+      {% csrf_token %}
+
+      <div>
+        <input
+          id="username"
+          name="username"
+          type="text"
+          autocomplete="username"
+          required
+          class="form-input w-full px-4 py-3 border-2 border-gray-200 dark:border-gray-700 bg-transparent rounded-lg text-gray-900 dark:text-white focus:border-primary focus:ring-primary"
+          placeholder="Nombre de usuario"
+        />
+      </div>
+
+      <div>
+        <input
+          id="password"
+          name="password"
+          type="password"
+          autocomplete="current-password"
+          required
+          class="form-input w-full px-4 py-3 border-2 border-gray-200 dark:border-gray-700 bg-transparent rounded-lg text-gray-900 dark:text-white focus:border-primary focus:ring-primary"
+          placeholder="Contraseña"
+        />
+      </div>
+
+      <div class="flex items-center justify-between text-sm">
+        <label class="flex items-center">
+          <input
+            type="checkbox"
+            name="remember"
+            class="mr-2 h-4 w-4 text-primary border-gray-300 rounded"
+          />
+          Recordarme
+        </label>
+        <a
+          href="{% url 'users:password_reset' %}"
+          class="font-medium text-primary hover:text-primary/90 transition"
+        >
+          ¿Olvidaste tu contraseña?
+        </a>
+      </div>
+
+      <button
+        type="submit"
+        class="w-full py-3 text-lg font-bold text-white bg-primary hover:bg-primary/90 rounded-lg transition-all shadow-md"
+      >
+        Entrar
+      </button>
+    </form>
+  </div>
+</div>
+{% endblock %}

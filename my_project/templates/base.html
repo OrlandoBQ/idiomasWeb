@@ -1,0 +1,49 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <!-- Fuente Lexend -->
+  <link href="https://fonts.googleapis.com" rel="preconnect"/>
+  <link crossorigin href="https://fonts.gstatic.com" rel="preconnect"/>
+  <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;700;900&display=swap" rel="stylesheet"/>
+
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com?plugins=container-queries"></script>
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            primary: "#13a4ec",
+            "background-light": "#f6f7f8",
+            "background-dark": "#101c22",
+          },
+          fontFamily: {
+            display: ["Lexend", "sans-serif"],
+          },
+        },
+      },
+    };
+  </script>
+
+  <title>{% block title %}LinguaLeap{% endblock %}</title>
+  <link rel="icon" href="{% static 'img/favicon.ico' %}" type="image/x-icon"/>
+</head>
+
+<body class="bg-background-light dark:bg-background-dark font-display text-gray-800 dark:text-gray-200 flex flex-col min-h-screen">
+  <!-- HEADER -->
+  {% include 'includes/navbar.html' %}
+
+  <!-- CONTENIDO -->
+  <main class="flex-grow">
+    {% block content %}{% endblock %}
+  </main>
+
+  <!-- FOOTER -->
+  {% include 'includes/footer.html' %}
+</body>
+</html>

@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Centro de Ayuda - LinguaLeap{% endblock %}
+
+{% block content %}
+<section class="py-20 bg-background-light/60 dark:bg-background-dark/40">
+  <div class="max-w-5xl mx-auto px-4 text-center">
+    <h1 class="text-4xl font-bold text-gray-900 dark:text-white">Centro de Ayuda</h1>
+    <p class="mt-4 text-lg text-gray-600 dark:text-gray-400">
+      Encuentra respuestas rápidas a las preguntas más comunes o contáctanos si necesitas ayuda personalizada.
+    </p>
+  </div>
+
+  <div class="mt-12 max-w-5xl mx-auto grid gap-6 md:grid-cols-2 px-4">
+    <!-- FAQ 1 -->
+    <div class="rounded-xl bg-background-light/60 dark:bg-background-dark/50 p-6 border border-gray-200/50 dark:border-gray-700/50">
+      <h3 class="text-lg font-bold text-gray-900 dark:text-white">
+        📘 ¿Cómo restablezco mi contraseña?
+      </h3>
+      <p class="mt-2 text-sm text-gray-600 dark:text-gray-400">
+        Haz clic en “¿Olvidaste tu contraseña?” en la página de inicio de sesión. Te enviaremos un correo con las instrucciones para restablecerla.
+      </p>
+    </div>
+
+    <!-- FAQ 2 -->
+    <div class="rounded-xl bg-background-light/60 dark:bg-background-dark/50 p-6 border border-gray-200/50 dark:border-gray-700/50">
+      <h3 class="text-lg font-bold text-gray-900 dark:text-white">
+        💳 ¿Cómo actualizo o cancelo mi suscripción?
+      </h3>
+      <p class="mt-2 text-sm text-gray-600 dark:text-gray-400">
+        Entra a tu panel de usuario → “Suscripción”. Desde allí podrás cambiar tu plan o cancelarlo fácilmente.
+      </p>
+    </div>
+
+    <!-- FAQ 3 -->
+    <div class="rounded-xl bg-background-light/60 dark:bg-background-dark/50 p-6 border border-gray-200/50 dark:border-gray-700/50">
+      <h3 class="text-lg font-bold text-gray-900 dark:text-white">
+        📚 ¿LinguaLeap funciona en móviles?
+      </h3>
+      <p class="mt-2 text-sm text-gray-600 dark:text-gray-400">
+        Sí, nuestra web es 100% responsive, por lo que puedes estudiar desde tu teléfono o tablet sin instalar nada.
+      </p>
+    </div>
+
+    <!-- FAQ 4 -->
+    <div class="rounded-xl bg-background-light/60 dark:bg-background-dark/50 p-6 border border-gray-200/50 dark:border-gray-700/50">
+      <h3 class="text-lg font-bold text-gray-900 dark:text-white">
+        🕒 ¿Mi progreso se guarda automáticamente?
+      </h3>
+      <p class="mt-2 text-sm text-gray-600 dark:text-gray-400">
+        Sí, LinguaLeap guarda tu progreso automáticamente en la nube, para que nunca pierdas tus avances.
+      </p>
+    </div>
+  </div>
+
+  <div class="mt-16 text-center">
+    <h2 class="text-2xl font-bold text-gray-900 dark:text-white">¿Aún necesitas ayuda?</h2>
+    <p class="mt-2 text-gray-600 dark:text-gray-400">
+      Escríbenos a <a href="mailto:soporte@lingualeap.com" class="text-primary hover:underline">soporte@lingualeap.com</a> y te responderemos lo antes posible.
+    </p>
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}LinguaLeap - Aprende idiomas{% endblock %}
+{% block content %}
+
+<!-- HERO -->
+<section
+  class="relative flex items-center justify-center h-screen bg-cover bg-center text-white"
+  style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7)), url('{% static 'img/hero.jpg' %}');"
+>
+  <div class="mx-auto max-w-4xl text-center px-4 sm:px-6 lg:px-8">
+    <h1 class="text-5xl font-black leading-tight tracking-tight sm:text-6xl lg:text-7xl">
+      Aprende idiomas con repetición espaciada
+    </h1>
+    <p class="mt-6 text-lg sm:text-xl text-gray-200 max-w-2xl mx-auto">
+      Mejora tu vocabulario y gramática con un sistema inteligente que se adapta a tu ritmo de aprendizaje.
+    </p>
+    <div class="mt-10 flex flex-wrap justify-center gap-4">
+      <a
+        href="#"
+        class="px-10 py-4 text-lg font-bold text-white bg-primary hover:bg-primary/90 rounded-lg shadow-lg transition-all"
+      >
+        Empezar ahora
+      </a>
+      <a
+        href="#benefits"
+        class="px-10 py-4 text-lg font-bold text-gray-900 dark:text-white bg-background-light/90 dark:bg-background-dark/50 hover:bg-white dark:hover:bg-background-dark rounded-lg shadow-lg transition-all"
+      >
+        Saber más
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- BENEFICIOS -->
+<section id="benefits" class="py-16 sm:py-24">
+  <!-- ... (tu contenido original de beneficios) ... -->
+</section>
+
+<!-- CTA FINAL -->
+<section class="bg-background-light/50 dark:bg-background-dark/50 pb-16 sm:pb-24 text-center">
+  <h2 class="text-3xl font-bold text-gray-900 dark:text-white sm:text-4xl">
+    ¿Listo para dar el salto?
+  </h2>
+  <p class="mt-4 text-lg text-gray-600 dark:text-gray-400">
+    Regístrate hoy y comienza tu camino hacia la fluidez.
+  </p>
+  <div class="mt-8 flex justify-center">
+    <a
+      href="#"
+      class="px-8 py-3 text-base font-bold text-white bg-primary hover:bg-primary/90 rounded-lg transition-colors"
+    >
+      Comenzar ahora
+    </a>
+  </div>
+</section>
+
+<!-- PLANES -->
+<section id="pricing" class="py-16">
+  <!-- ... (contenido igual que antes) ... -->
+</section>
+
+<!-- SOPORTE -->
+<section id="support" class="py-20 bg-background-light/60 dark:bg-background-dark/40">
+  <div class="max-w-4xl mx-auto px-4 text-center">
+    <h2 class="text-3xl font-bold text-gray-900 dark:text-white sm:text-4xl">
+      ¿Necesitas ayuda?
+    </h2>
+    <p class="mt-4 text-lg text-gray-600 dark:text-gray-400">
+      Nuestro equipo de soporte está disponible para ayudarte con cualquier duda o problema.
+    </p>
+    <div class="mt-8 space-y-4 text-gray-700 dark:text-gray-300">
+      <p>
+        📧 Escríbenos a
+        <a href="mailto:soporte@lingualeap.com" class="text-primary hover:underline">
+          soporte@lingualeap.com
+        </a>
+      </p>
+      <p>💬 O visítanos en el centro de ayuda para guías y tutoriales.</p>
+    </div>
+    <div class="mt-10">
+      <a
+        href="#"
+        class="px-8 py-3 font-bold text-white bg-primary hover:bg-primary/90 rounded-lg transition"
+      >
+        Ir al Centro de Ayuda
+      </a>
+    </div>
+  </div>
+</section>
+
+{% endblock %}
