@@ -1,23 +1,26 @@
-{% extends "base.html" %}
-{% load static %}
-{% block title %}LinguaLeap - Aprende idiomas{% endblock %}
-{% block content %}
+{% extends "base.html" %} {% load static %} {% block title %}LinguaLeap -
+Aprende idiomas{% endblock %} {% block content %}
 
 <!-- HERO -->
 <section
   class="relative flex items-center justify-center h-screen bg-cover bg-center text-white"
-  style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7)), url('{% static 'img/hero.jpg' %}');"
+  style="
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7)),
+      url('{% static 'img/hero.jpg' %}');"
 >
   <div class="mx-auto max-w-4xl text-center px-4 sm:px-6 lg:px-8">
-    <h1 class="text-5xl font-black leading-tight tracking-tight sm:text-6xl lg:text-7xl">
+    <h1
+      class="text-5xl font-black leading-tight tracking-tight sm:text-6xl lg:text-7xl"
+    >
       Aprende idiomas con repetición espaciada
     </h1>
     <p class="mt-6 text-lg sm:text-xl text-gray-200 max-w-2xl mx-auto">
-      Mejora tu vocabulario y gramática con un sistema inteligente que se adapta a tu ritmo de aprendizaje.
+      Mejora tu vocabulario y gramática con un sistema inteligente que se adapta
+      a tu ritmo de aprendizaje.
     </p>
     <div class="mt-10 flex flex-wrap justify-center gap-4">
       <a
-        href="#"
+        href="{% url 'users:signup' %}"
         class="px-10 py-4 text-lg font-bold text-white bg-primary hover:bg-primary/90 rounded-lg shadow-lg transition-all"
       >
         Empezar ahora
@@ -34,11 +37,106 @@
 
 <!-- BENEFICIOS -->
 <section id="benefits" class="py-16 sm:py-24">
-  <!-- ... (tu contenido original de beneficios) ... -->
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <div class="text-center max-w-3xl mx-auto">
+      <h2 class="text-3xl font-bold text-gray-900 dark:text-white sm:text-4xl">
+        ¿Por qué elegir LinguaLeap?
+      </h2>
+      <p class="mt-4 text-lg text-gray-600 dark:text-gray-400">
+        Nuestra plataforma combina ciencia y tecnología para ayudarte a aprender
+        más rápido y recordar por más tiempo.
+      </p>
+    </div>
+
+    <div class="mt-12 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+      <!-- Tarjeta 1 -->
+      <div
+        class="flex flex-col items-start gap-4 rounded-lg border border-gray-200/80 dark:border-gray-700/80 bg-background-light dark:bg-gray-800/20 p-6 text-left"
+      >
+        <div
+          class="flex h-12 w-12 items-center justify-center rounded-lg bg-primary/20 text-primary"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="w-6 h-6"
+            fill="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M12 2a10 10 0 1 0 10 10A10.011 10.011 0 0 0 12 2Zm1 14.93V13h3a1 1 0 0 0 0-2h-3V7.07A8.007 8.007 0 0 1 20 12a8.007 8.007 0 0 1-7 6.93Z"
+            />
+          </svg>
+        </div>
+        <h3 class="text-lg font-bold text-gray-900 dark:text-white">
+          Aprendizaje Inteligente
+        </h3>
+        <p class="text-sm text-gray-600 dark:text-gray-400">
+          Utilizamos repetición espaciada (SRS) para reforzar tus conocimientos
+          justo antes de que los olvides, optimizando tu memoria a largo plazo.
+        </p>
+      </div>
+
+      <!-- Tarjeta 2 -->
+      <div
+        class="flex flex-col items-start gap-4 rounded-lg border border-gray-200/80 dark:border-gray-700/80 bg-background-light dark:bg-gray-800/20 p-6 text-left"
+      >
+        <div
+          class="flex h-12 w-12 items-center justify-center rounded-lg bg-primary/20 text-primary"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="w-6 h-6"
+            fill="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M12 2a10 10 0 1 0 10 10A10.011 10.011 0 0 0 12 2ZM7 12a1 1 0 0 1 2 0v3a1 1 0 0 1-2 0Zm8 0a1 1 0 0 1 2 0v3a1 1 0 0 1-2 0Zm-4 6a8.009 8.009 0 0 1-6.32-3.09 1 1 0 1 1 1.64-1.18A6.006 6.006 0 0 0 12 18a6.006 6.006 0 0 0 5.68-4.27 1 1 0 0 1 1.64 1.18A8.009 8.009 0 0 1 12 18Z"
+            />
+          </svg>
+        </div>
+        <h3 class="text-lg font-bold text-gray-900 dark:text-white">
+          Contenidos Personalizados
+        </h3>
+        <p class="text-sm text-gray-600 dark:text-gray-400">
+          Adaptamos el ritmo y dificultad de las lecciones a tu nivel, para que
+          aprendas de forma efectiva sin frustración ni aburrimiento.
+        </p>
+      </div>
+
+      <!-- Tarjeta 3 -->
+      <div
+        class="flex flex-col items-start gap-4 rounded-lg border border-gray-200/80 dark:border-gray-700/80 bg-background-light dark:bg-gray-800/20 p-6 text-left"
+      >
+        <div
+          class="flex h-12 w-12 items-center justify-center rounded-lg bg-primary/20 text-primary"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="w-6 h-6"
+            fill="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M12 1a11 11 0 0 0 0 22h10v-2H12a9 9 0 1 1 9-9V8h-2v4a7 7 0 1 0-7 7h1v-2h-1a5 5 0 1 1 5-5V9h-2v3a3 3 0 1 1-3-3h1V7h-1a5 5 0 0 0 0 10h10V1Z"
+            />
+          </svg>
+        </div>
+        <h3 class="text-lg font-bold text-gray-900 dark:text-white">
+          Progreso Medible
+        </h3>
+        <p class="text-sm text-gray-600 dark:text-gray-400">
+          Visualiza tu avance, tu racha de estudio y tus puntos fuertes con
+          nuestras estadísticas de aprendizaje en tiempo real.
+        </p>
+      </div>
+    </div>
+  </div>
 </section>
 
 <!-- CTA FINAL -->
-<section class="bg-background-light/50 dark:bg-background-dark/50 pb-16 sm:pb-24 text-center">
+<section
+  class="bg-background-light/50 dark:bg-background-dark/50 pb-16 sm:pb-24 text-center"
+>
   <h2 class="text-3xl font-bold text-gray-900 dark:text-white sm:text-4xl">
     ¿Listo para dar el salto?
   </h2>
@@ -47,7 +145,7 @@
   </p>
   <div class="mt-8 flex justify-center">
     <a
-      href="#"
+      href="{% url 'users:signup' %}"
       class="px-8 py-3 text-base font-bold text-white bg-primary hover:bg-primary/90 rounded-lg transition-colors"
     >
       Comenzar ahora
@@ -57,30 +155,152 @@
 
 <!-- PLANES -->
 <section id="pricing" class="py-16">
-  <!-- ... (contenido igual que antes) ... -->
+  <div class="max-w-6xl mx-auto text-center">
+    <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-4">
+      Planes de LinguaLeap
+    </h2>
+    <p class="text-gray-600 dark:text-gray-400 mb-12">
+      Actualmente estás en el plan
+      <span class="font-semibold text-primary">Gratis</span>. ¡Desbloquea más
+      funciones actualizando!
+    </p>
+
+    <div class="grid md:grid-cols-3 gap-8">
+      <!-- Gratis (activo o disponible) -->
+      <div
+        class="border border-primary rounded-2xl bg-primary/10 dark:bg-primary/20 p-8 shadow-md flex flex-col justify-between"
+      >
+        <div>
+          <h3 class="text-2xl font-bold text-primary mb-2">Gratis</h3>
+          <p class="text-gray-600 dark:text-gray-300 mb-6">
+            Ideal para comenzar
+          </p>
+          <p class="text-4xl font-extrabold text-gray-900 dark:text-white mb-6">
+            $0<span class="text-lg font-medium text-gray-500">/mes</span>
+          </p>
+          <ul class="text-left text-gray-700 dark:text-gray-300 space-y-3 mb-8">
+            <li>✅ Acceso a tarjetas básicas</li>
+            <li>✅ Seguimiento de progreso</li>
+            <li>❌ Sin modo offline</li>
+            <li>❌ Sin estadísticas avanzadas</li>
+          </ul>
+        </div>
+
+        {% if request.user.is_authenticated %}
+        <button
+          disabled
+          class="w-full py-3 font-bold bg-gray-300 text-gray-600 rounded-lg cursor-not-allowed"
+        >
+          Activo
+        </button>
+        {% else %}
+        <a
+          href="{% url 'users:signup' %}"
+          class="w-full py-3 font-bold text-white bg-primary hover:bg-primary/90 rounded-lg transition"
+        >
+          Comenzar
+        </a>
+        {% endif %}
+      </div>
+
+      <!-- Pro (bloqueado) -->
+      <div
+        class="relative border border-gray-300 dark:border-gray-700 rounded-2xl bg-gray-100/50 dark:bg-gray-800/40 p-8 flex flex-col justify-between opacity-70"
+      >
+        <div
+          class="absolute inset-0 backdrop-blur-[1px] bg-gray-200/20 dark:bg-gray-900/20 rounded-2xl flex items-center justify-center"
+        >
+          <span
+            class="text-sm font-semibold bg-gray-800 text-white dark:bg-gray-700 px-3 py-1 rounded-full"
+            >Bloqueado</span
+          >
+        </div>
+        <div>
+          <h3 class="text-2xl font-bold text-primary mb-2">Pro</h3>
+          <p class="text-gray-600 dark:text-gray-300 mb-6">
+            Más estadísticas y personalización
+          </p>
+          <p class="text-4xl font-extrabold text-gray-900 dark:text-white mb-6">
+            $10<span class="text-lg font-medium text-gray-500">/mes</span>
+          </p>
+          <ul class="text-left text-gray-700 dark:text-gray-300 space-y-3 mb-8">
+            <li>✅ Todo lo del plan Gratis</li>
+            <li>✅ Estadísticas detalladas</li>
+            <li>✅ Revisión personalizada</li>
+            <li>❌ Sin soporte prioritario</li>
+          </ul>
+        </div>
+        <a
+          href="#"
+          class="w-full py-3 font-bold text-white bg-primary hover:bg-primary/90 rounded-lg transition"
+          >Actualizar a Pro</a
+        >
+      </div>
+
+      <!-- Premium (bloqueado) -->
+      <div
+        class="relative border border-gray-300 dark:border-gray-700 rounded-2xl bg-gray-100/50 dark:bg-gray-800/40 p-8 flex flex-col justify-between opacity-70"
+      >
+        <div
+          class="absolute inset-0 backdrop-blur-[1px] bg-gray-200/20 dark:bg-gray-900/20 rounded-2xl flex items-center justify-center"
+        >
+          <span
+            class="text-sm font-semibold bg-gray-800 text-white dark:bg-gray-700 px-3 py-1 rounded-full"
+            >Bloqueado</span
+          >
+        </div>
+        <div>
+          <h3 class="text-2xl font-bold text-primary mb-2">Premium</h3>
+          <p class="text-gray-600 dark:text-gray-300 mb-6">
+            Experiencia completa sin límites
+          </p>
+          <p class="text-4xl font-extrabold text-gray-900 dark:text-white mb-6">
+            $20<span class="text-lg font-medium text-gray-500">/mes</span>
+          </p>
+          <ul class="text-left text-gray-700 dark:text-gray-300 space-y-3 mb-8">
+            <li>✅ Todo lo del plan Pro</li>
+            <li>✅ Soporte prioritario 24/7</li>
+            <li>✅ Acceso anticipado a nuevas funciones</li>
+            <li>✅ Modo offline y sincronización</li>
+          </ul>
+        </div>
+        <a
+          href="#"
+          class="w-full py-3 font-bold text-white bg-primary hover:bg-primary/90 rounded-lg transition"
+          >Obtener Premium</a
+        >
+      </div>
+    </div>
+  </div>
 </section>
 
 <!-- SOPORTE -->
-<section id="support" class="py-20 bg-background-light/60 dark:bg-background-dark/40">
+<section
+  id="support"
+  class="py-20 bg-background-light/60 dark:bg-background-dark/40"
+>
   <div class="max-w-4xl mx-auto px-4 text-center">
     <h2 class="text-3xl font-bold text-gray-900 dark:text-white sm:text-4xl">
       ¿Necesitas ayuda?
     </h2>
     <p class="mt-4 text-lg text-gray-600 dark:text-gray-400">
-      Nuestro equipo de soporte está disponible para ayudarte con cualquier duda o problema.
+      Nuestro equipo de soporte está disponible para ayudarte con cualquier duda
+      o problema.
     </p>
     <div class="mt-8 space-y-4 text-gray-700 dark:text-gray-300">
       <p>
         📧 Escríbenos a
-        <a href="mailto:soporte@lingualeap.com" class="text-primary hover:underline">
-          soporte@lingualeap.com
-        </a>
+        <a
+          href="mailto:soporte@lingualeap.com"
+          class="text-primary hover:underline"
+          >soporte@lingualeap.com</a
+        >
       </p>
       <p>💬 O visítanos en el centro de ayuda para guías y tutoriales.</p>
     </div>
     <div class="mt-10">
       <a
-        href="#"
+        href="{% url 'help_center' %}"
         class="px-8 py-3 font-bold text-white bg-primary hover:bg-primary/90 rounded-lg transition"
       >
         Ir al Centro de Ayuda

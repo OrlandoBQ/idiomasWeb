@@ -1,0 +1,36 @@
+{% extends "base.html" %} {% block title %}{{ lesson_class.title }} -
+LinguaLeap{% endblock %} {% block content %}
+<div class="max-w-3xl mx-auto py-12 px-6 font-display">
+  <h2 class="text-3xl font-bold mb-4 text-gray-900 dark:text-white">
+    {{ lesson_class.title }}
+  </h2>
+  <p class="text-gray-700 dark:text-gray-300 mb-6">
+    {{ lesson_class.description }}
+  </p>
+
+  {% if progress.completed %}
+  <div class="bg-green-100 text-green-800 p-4 rounded-lg font-semibold mb-4">
+    ✅ Ya completaste esta clase
+  </div>
+  {% else %}
+  <form method="POST">
+    {% csrf_token %}
+    <button
+      type="submit"
+      class="px-6 py-3 bg-primary text-white font-bold rounded-lg hover:bg-primary/90 transition"
+    >
+      Marcar como completada
+    </button>
+  </form>
+  {% endif %}
+
+  <div class="mt-6">
+    <a
+      href="{% url 'study:start' lesson_class.deck.id %}"
+      class="inline-block mt-4 px-6 py-3 bg-secondary text-white rounded-lg shadow hover:bg-secondary/90 transition"
+    >
+      🧠 Estudiar este Deck
+    </a>
+  </div>
+</div>
+{% endblock %}
