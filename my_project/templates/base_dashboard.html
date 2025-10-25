@@ -1,0 +1,146 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %}LinguaLeap Dashboard{% endblock %}</title>
+
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              primary: "#13a4ec",
+              "background-light": "#f6f7f8",
+              "background-dark": "#101c22",
+            },
+            fontFamily: {
+              display: ["Lexend", "sans-serif"],
+            },
+          },
+        },
+      };
+    </script>
+
+    <link rel="stylesheet" href="{% static 'css/dashboard.css' %}" />
+  </head>
+
+  <body
+    class="bg-background-light dark:bg-background-dark font-display text-gray-800 dark:text-white"
+  >
+    <div class="flex min-h-screen">
+      <!-- SIDEBAR -->
+      <aside
+        class="w-64 bg-white dark:bg-[#1a2830] p-6 flex flex-col justify-between"
+      >
+        <div>
+          <!-- Perfil pequeño -->
+          <div class="flex items-center gap-3 mb-10">
+            <div
+              class="bg-primary/10 text-primary rounded-full size-12 flex items-center justify-center font-bold text-lg"
+            >
+              {{ request.user.username|first|upper }}
+            </div>
+            <div>
+              <h1 class="text-lg font-bold text-gray-900 dark:text-white">
+                {{ request.user.username }}
+              </h1>
+              <p class="text-sm text-gray-500 dark:text-gray-400">Estudiante</p>
+            </div>
+          </div>
+
+          <!-- Navegación -->
+          <nav class="flex flex-col gap-2">
+            <a
+              href="{% url 'users:dashboard' %}"
+              class="flex items-center gap-3 px-4 py-2 rounded-lg {% if request.resolver_match.url_name == 'dashboard' %}bg-primary/10 text-primary font-bold{% else %}text-gray-600 dark:text-gray-300 hover:bg-primary/10 hover:text-primary{% endif %}"
+            >
+              <svg
+                fill="currentColor"
+                height="22"
+                width="22"
+                viewBox="0 0 24 24"
+              >
+                <path d="M12 3l7 6v12H5V9z" />
+              </svg>
+              <span>Inicio</span>
+            </a>
+            <a
+              href="{% url 'classes:class_list' %}"
+              class="flex items-center gap-3 px-4 py-2 rounded-lg {% if request.resolver_match.app_name == 'classes' %}bg-primary/10 text-primary font-bold {% else %}text-gray-600 dark:text-gray-300 hover:bg-primary/10 hover:text-primary{% endif %}"
+            >
+              <svg
+                fill="currentColor"
+                height="22"
+                width="22"
+                viewBox="0 0 24 24"
+              >
+                <path d="M12 21l-8-5V3l8 5 8-5v13z" />
+              </svg>
+              <span>Lecciones</span>
+            </a>
+
+            <a
+              href="#"
+              class="flex items-center gap-3 px-4 py-2 rounded-lg text-gray-600 dark:text-gray-300 hover:bg-primary/10 hover:text-primary"
+            >
+              <svg
+                fill="currentColor"
+                height="22"
+                width="22"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M12 2a10 10 0 0110 10 10 10 0 11-10-10zm0 18a8 8 0 108-8 8 8 0 00-8 8z"
+                />
+              </svg>
+              <span>Progreso</span>
+            </a>
+            <a
+              href="#"
+              class="flex items-center gap-3 px-4 py-2 rounded-lg text-gray-600 dark:text-gray-300 hover:bg-primary/10 hover:text-primary"
+            >
+              <svg
+                fill="currentColor"
+                height="22"
+                width="22"
+                viewBox="0 0 24 24"
+              >
+                <path d="M4 4h16v16H4z" />
+              </svg>
+              <span>Comunidad</span>
+            </a>
+          </nav>
+        </div>
+
+        <div>
+          <a
+            href="{% url 'users:logout' %}"
+            class="flex items-center justify-center gap-2 bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-lg transition"
+          >
+            <svg
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              height="20"
+              width="20"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h6a2 2 0 012 2v1"
+              />
+            </svg>
+            Cerrar sesión
+          </a>
+        </div>
+      </aside>
+
+      <!-- CONTENIDO -->
+      <main class="flex-1 p-8">{% block content %} {% endblock %}</main>
+    </div>
+  </body>
+</html>
