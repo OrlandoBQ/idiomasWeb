@@ -15,7 +15,7 @@ urlpatterns = [
     path('activate/<uidb64>/<token>/', views.activate_account, name='activate'),
     path('email-sent/', views.email_sent_view, name='email_sent'),
 
-    # 🔹 Recuperar contraseña
+    # Recuperar contraseña
     path('password-reset/',
          auth_views.PasswordResetView.as_view(
              template_name='users/password_reset.html',

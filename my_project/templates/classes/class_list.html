@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}Clases - LinguaLeap{% endblock %}
+{% block content %}
+<div class="max-w-4xl mx-auto py-12 px-6 font-display">
+  <h2 class="text-3xl font-bold mb-6 text-gray-900 dark:text-white">Clases disponibles</h2>
+
+  <div class="grid gap-6 md:grid-cols-2">
+    {% for c in classes %}
+      <div class="p-6 rounded-xl shadow-md border bg-white dark:bg-gray-800 dark:border-gray-700 transition">
+        <h3 class="text-xl font-semibold text-gray-900 dark:text-white">{{ c.title }}</h3>
+        <p class="mt-2 text-gray-600 dark:text-gray-400">{{ c.description|truncatechars:120 }}</p>
+        <div class="mt-4 flex justify-between items-center">
+          <span class="text-sm text-primary font-medium">{{ c.get_level_display }}</span>
+          {% if c.id in completed %}
+            <span class="text-green-600 font-bold">✅ Completada</span>
+          {% else %}
+            <a href="{% url 'classes:class_detail' c.id %}" class="text-primary hover:underline font-semibold">Ver clase →</a>
+          {% endif %}
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}
