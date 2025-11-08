@@ -1,21 +1,54 @@
-{% extends "base.html" %}
-{% block title %}Estudio - {{ deck.title }}{% endblock %}
-{% block content %}
-<div class="max-w-2xl mx-auto py-12 px-6 font-display text-center">
-  <h2 class="text-2xl font-bold mb-6 text-gray-900 dark:text-white">Estudiando: {{ deck.title }}</h2>
-  
-  <div class="p-6 bg-white dark:bg-gray-800 border rounded-xl shadow-lg">
-    <p class="text-lg text-gray-800 dark:text-gray-200 mb-6">{{ card.front_text }}</p>
-    <button 
-      onclick="document.getElementById('back').classList.toggle('hidden')"
-      class="px-4 py-2 bg-primary text-white rounded-lg shadow hover:bg-primary/90 transition">
-      Mostrar respuesta
-    </button>
-    <p id="back" class="hidden mt-4 text-gray-700 dark:text-gray-300">{{ card.back_text }}</p>
-  </div>
+{% extends "base_dashboard.html" %}
 
-  <div class="mt-8">
-    <a href="{% url 'dashboard' %}" class="text-primary hover:underline">← Volver al Dashboard</a>
-  </div>
+{% block title %}{{ deck.title }} - Sesión de estudio{% endblock %}
+
+{% block content %}
+<div class="max-w-2xl mx-auto bg-white dark:bg-background-dark p-6 rounded-xl shadow-lg text-center">
+
+  <!-- Título del Deck -->
+  <h2 class="text-2xl font-bold mb-2">{{ deck.title }}</h2>
+
+  <!-- Progreso de la sesión -->
+  {% if remaining is defined %}
+    <p class="text-sm text-gray-500 mb-4">
+      Carta {{ deck.cards.count|add:"-remaining" }} de {{ deck.cards.count }}
+    </p>
+  {% endif %}
+
+  <!-- Frontal de la carta -->
+  <p class="text-lg text-gray-800 dark:text-gray-300 mb-6">{{ card.front }}</p>
+
+  <!-- Respuesta desplegable -->
+  <details class="mb-6">
+    <summary class="cursor-pointer text-primary font-semibold">Mostrar respuesta</summary>
+    <p class="mt-3 text-xl text-gray-700 dark:text-gray-200">{{ card.back }}</p>
+  </details>
+
+  <!-- Botones de puntuación -->
+  <form method="POST" action="{% url 'study:review_card' session.id card.id %}" class="space-x-3">
+    {% csrf_token %}
+    <input type="hidden" name="score" id="scoreInput" value="">
+    <button type="button" onclick="submitScore(1)"
+      class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg">
+      Otra vez
+    </button>
+    <button type="button" onclick="submitScore(3)"
+      class="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded-lg">
+      Difícil
+    </button>
+    <button type="button" onclick="submitScore(5)"
+      class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg">
+      Fácil
+    </button>
+  </form>
+
 </div>
+
+<!-- Script para enviar la puntuación -->
+<script>
+function submitScore(score) {
+  document.getElementById('scoreInput').value = score;
+  document.forms[0].submit();
+}
+</script>
 {% endblock %}

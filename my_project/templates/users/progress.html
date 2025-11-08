@@ -1,0 +1,30 @@
+{% extends "base_dashboard.html" %}
+
+{% block title %}Tu Progreso - LinguaLeap{% endblock %}
+
+{% block content %}
+<header class="mb-8">
+  <h1 class="text-4xl font-bold text-gray-900 dark:text-white">Tu progreso</h1>
+  <p class="text-gray-500 dark:text-gray-400 mt-1">Visualiza tus avances en el aprendizaje</p>
+</header>
+
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+  <!-- Palabras dominadas -->
+  <div class="bg-white dark:bg-background-dark/50 p-6 rounded-lg">
+    <p class="text-gray-500 dark:text-gray-400">Palabras dominadas</p>
+    <p class="text-3xl font-bold mt-1">{{ mastered }}</p>
+  </div>
+
+  <!-- Revisiones hoy -->
+  <div class="bg-white dark:bg-background-dark/50 p-6 rounded-lg">
+    <p class="text-gray-500 dark:text-gray-400">Revisiones hoy</p>
+    <p class="text-3xl font-bold mt-1">{{ reviews_today }}</p>
+  </div>
+
+  <!-- Tarjetas pendientes -->
+  <div class="bg-white dark:bg-background-dark/50 p-6 rounded-lg">
+    <p class="text-gray-500 dark:text-gray-400">Tarjetas pendientes</p>
+    <p class="text-3xl font-bold mt-1">{{ pending_cards }}</p>
+  </div>
+</div>
+{% endblock %}

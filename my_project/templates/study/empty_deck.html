@@ -1,11 +1,15 @@
-{% extends "base.html" %}
-{% block title %}Sin tarjetas - {{ deck.title }}{% endblock %}
+{% extends "base_dashboard.html" %}
+
+{% block title %}Deck vacío{% endblock %}
+
 {% block content %}
-<div class="max-w-md mx-auto py-16 px-6 text-center font-display">
-  <h2 class="text-2xl font-bold mb-4 text-gray-900 dark:text-white">No hay tarjetas disponibles</h2>
-  <p class="text-gray-600 dark:text-gray-400 mb-6">
-    Este deck aún no tiene tarjetas para estudiar.
+<div class="text-center py-20">
+  <h2 class="text-2xl font-bold text-gray-900 dark:text-white">⚠️ Este deck está vacío</h2>
+  <p class="text-gray-600 dark:text-gray-400 mt-2">
+    No hay cartas disponibles para estudiar. Agrega algunas cartas para poder empezar la sesión.
   </p>
-  <a href="{% url 'classes:class_list' %}" class="text-primary hover:underline">← Volver a las clases</a>
+  <a href="{% url 'users:dashboard' %}" class="mt-4 inline-block px-6 py-3 bg-primary text-white rounded-lg">
+    ← Volver al Dashboard
+  </a>
 </div>
 {% endblock %}
