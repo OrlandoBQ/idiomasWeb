@@ -1,23 +1,113 @@
-{% extends "base.html" %}
-{% block title %}Clases - LinguaLeap{% endblock %}
+{% extends "base_dashboard.html" %}
+{% block title %}
+Clases - LinguaLeap
+{% endblock %}
+
 {% block content %}
-<div class="max-w-4xl mx-auto py-12 px-6 font-display">
-  <h2 class="text-3xl font-bold mb-6 text-gray-900 dark:text-white">Clases disponibles</h2>
+<div class="max-w-6xl mx-auto py-12 px-6 font-display">
+  <h2 class="text-3xl font-bold mb-6 text-gray-900 dark:text-white">
+    Clases disponibles
+  </h2>
 
   <div class="grid gap-6 md:grid-cols-2">
     {% for c in classes %}
-      <div class="p-6 rounded-xl shadow-md border bg-white dark:bg-gray-800 dark:border-gray-700 transition">
-        <h3 class="text-xl font-semibold text-gray-900 dark:text-white">{{ c.title }}</h3>
-        <p class="mt-2 text-gray-600 dark:text-gray-400">{{ c.description|truncatechars:120 }}</p>
-        <div class="mt-4 flex justify-between items-center">
-          <span class="text-sm text-primary font-medium">{{ c.get_level_display }}</span>
-          {% if c.id in completed %}
-            <span class="text-green-600 font-bold">✅ Completada</span>
+    <div
+      class="p-6 rounded-xl shadow-md border bg-white dark:bg-gray-800 dark:border-gray-700 transition"
+    >
+      <!-- Título y descripción -->
+      <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+        {{ c.title }}
+      </h3>
+      <p class="mt-2 text-gray-600 dark:text-gray-400">
+        {{ c.description|truncatechars:120 }}
+      </p>
+
+      <!-- Info del Deck -->
+      <div class="mt-3 text-sm text-gray-500 flex flex-wrap items-center gap-3">
+        <span>
+          <strong>Deck:</strong>
+          <a
+            href="{% url 'decks:detail' c.deck.id %}"
+            class="text-primary hover:underline"
+            >{{ c.deck.title }}</a
+          >
+        </span>
+
+        <span>•</span>
+        <span>Por <strong>{{ c.deck.owner.username }}</strong></span>
+        <span>•</span>
+
+        <span>
+          {% if c.cards_count %}
+            {{ c.cards_count }} tarjetas
           {% else %}
-            <a href="{% url 'classes:class_detail' c.id %}" class="text-primary hover:underline font-semibold">Ver clase →</a>
+            {{ c.deck.cards.count }} tarjetas
           {% endif %}
-        </div>
+        </span>
+
+        {% if c.deck.visibility == 'public' %}
+        <span
+          class="ml-2 inline-block px-2 py-0.5 bg-green-100 text-green-800 rounded-full"
+          >Público</span
+        >
+        {% else %}
+        <span
+          class="ml-2 inline-block px-2 py-0.5 bg-gray-100 text-gray-700 rounded-full"
+          >Privado</span
+        >
+        {% endif %}
       </div>
+
+      <!-- Footer: nivel / acciones -->
+      <div class="mt-4 flex justify-between items-center">
+        <span class="text-sm text-primary font-medium">
+          {{ c.get_level_display }}
+        </span>
+
+        {% with status=deck_statuses.c.deck.id %}
+        {% if status == 'completed' %}
+          <span class="text-green-600 font-bold">✅ Completada</span>
+        {% elif status == 'review_due' %}
+          <div class="flex items-center gap-3">
+            <span class="text-yellow-600 font-bold">🔁 Lista para repaso</span>
+            <a
+              href="{% url 'study:start' c.deck.id %}"
+              class="ml-2 inline-block px-3 py-1 bg-yellow-500 text-white rounded-md text-sm"
+              >Repasar</a
+            >
+          </div>
+        {% elif status == 'in_progress' %}
+          <div class="flex items-center gap-3">
+            <span class="text-blue-600 font-semibold">📘 En progreso</span>
+            <a
+              href="{% url 'study:start' c.deck.id %}"
+              class="ml-2 inline-block px-3 py-1 bg-secondary text-white rounded-md text-sm"
+              >Continuar</a
+            >
+          </div>
+        {% else %}
+          <div class="flex items-center gap-3">
+            <a
+              href="{% url 'classes:class_detail' c.id %}"
+              class="text-primary hover:underline font-semibold"
+              >Ver clase →</a
+            >
+            {% if c.deck.cards.count > 0 %}
+              <a
+                href="{% url 'study:start' c.deck.id %}"
+                class="ml-2 inline-block px-3 py-1 bg-primary text-white rounded-md text-sm"
+                >Comenzar</a
+              >
+            {% else %}
+              <span class="ml-2 text-sm text-gray-400">Sin tarjetas</span>
+            {% endif %}
+          </div>
+        {% endif %}
+        {% endwith %}
+      </div>
+    </div>
+    {% empty %}
+    <p class="text-gray-600">No hay clases disponibles todavía.</p>
     {% endfor %}
   </div>
 </div>

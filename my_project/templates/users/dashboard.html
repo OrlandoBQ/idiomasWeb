@@ -1,4 +1,5 @@
 {% extends "base_dashboard.html" %}
+
 {% block title %}Tu Panel - LinguaLeap{% endblock %}
 
 {% block content %}
@@ -6,76 +7,120 @@
   <h1 class="text-4xl font-bold text-gray-900 dark:text-white">
     ¡Bienvenido de nuevo, {{ request.user.first_name|default:request.user.username }}!
   </h1>
-  <p class="text-gray-500 dark:text-gray-400 mt-1">Continúa tu camino de aprendizaje en inglés</p>
+  <p class="text-gray-500 dark:text-gray-400 mt-1">
+    Continúa tu camino de aprendizaje en inglés
+  </p>
 </header>
+
 
 <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
   <!-- Objetivos -->
   <div class="lg:col-span-2 space-y-8">
     <section>
-      <h2 class="text-2xl font-bold mb-4 text-gray-900 dark:text-white">Tus metas de hoy</h2>
+      <h2 class="text-2xl font-bold mb-4 text-gray-900 dark:text-white">
+        Tus metas de hoy
+      </h2>
       <div class="space-y-4">
-        <div class="bg-white dark:bg-background-dark/50 p-4 rounded-lg flex items-center gap-4">
+        <div
+          class="bg-white dark:bg-background-dark/50 p-4 rounded-lg flex items-center gap-4"
+        >
           <div class="bg-primary/10 text-primary p-3 rounded-full">
-            <svg fill="currentColor" height="20" width="20" viewBox="0 0 24 24"><path d="M5 12h14"/></svg>
+            <!-- icono -->
+            <svg fill="currentColor" height="20" width="20" viewBox="0 0 24 24">
+              <path d="M5 12h14" />
+            </svg>
           </div>
           <div class="flex-1">
-            <p class="font-semibold">Completar 5 lecciones</p>
-            <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2 mt-2">
-              <div class="bg-primary h-2 rounded-full" style="width: 60%;"></div>
+            <p class="font-semibold">Completar {{ lessons_goal }} lecciones</p>
+            <div
+              class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2 mt-2 overflow-hidden"
+            >
+              <div
+                class="bg-primary h-2 rounded-full"
+                style="width: {{ progress_pct }}%;"
+              ></div>
             </div>
           </div>
-          <span class="font-bold text-gray-600 dark:text-gray-300">3/5</span>
+          <span class="font-bold text-gray-600 dark:text-gray-300"
+            >{{ lessons_completed_today }}/{{ lessons_goal }}</span
+          >
         </div>
       </div>
     </section>
 
     <!-- Accesos rápidos -->
     <section>
-      <h2 class="text-2xl font-bold mb-4 text-gray-900 dark:text-white">Accesos rápidos</h2>
+      <h2 class="text-2xl font-bold mb-4 text-gray-900 dark:text-white">
+        Accesos rápidos
+      </h2>
       <div class="grid sm:grid-cols-2 gap-6">
         <!-- Lecciones -->
-        <a href="{% url 'classes:class_list' %}" 
-           class="group bg-white dark:bg-background-dark/50 p-6 rounded-lg shadow border border-gray-200 dark:border-gray-700 hover:bg-primary/10 transition flex flex-col justify-between">
+        <a
+          href="{% url 'classes:class_list' %}"
+          class="group bg-white dark:bg-background-dark/50 p-6 rounded-lg shadow border border-gray-200 dark:border-gray-700 hover:bg-primary/10 transition flex flex-col justify-between"
+        >
           <div>
-            <div class="bg-primary/10 text-primary p-3 rounded-full inline-flex mb-4">
-              <svg fill="currentColor" height="24" width="24" viewBox="0 0 24 24"><path d="M12 21l-8-5V3l8 5 8-5v13z"/></svg>
+            <div
+              class="bg-primary/10 text-primary p-3 rounded-full inline-flex mb-4"
+            >
+              <svg
+                fill="currentColor"
+                height="24"
+                width="24"
+                viewBox="0 0 24 24"
+              >
+                <path d="M12 21l-8-5V3l8 5 8-5v13z" />
+              </svg>
             </div>
-            <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-2 group-hover:text-primary">Lecciones</h3>
-            <p class="text-gray-600 dark:text-gray-400 text-sm">Explora las clases y comienza una nueva lección.</p>
+            <h3
+              class="text-xl font-semibold text-gray-900 dark:text-white mb-2 group-hover:text-primary"
+            >
+              Lecciones
+            </h3>
+            <p class="text-gray-600 dark:text-gray-400 text-sm">
+              Explora las clases y comienza una nueva lección.
+            </p>
           </div>
           <div class="mt-4 text-primary font-semibold">Ir ahora →</div>
         </a>
 
-        <!-- Estudio -->
-        <a href="{% url 'study:start' 1 %}" 
-           class="group bg-white dark:bg-background-dark/50 p-6 rounded-lg shadow border border-gray-200 dark:border-gray-700 hover:bg-primary/10 transition flex flex-col justify-between">
+        <!-- Sesión de estudio -->
+        {% if request.user.deck_set.exists %}
+        <a
+          href="{% url 'study:start' request.user.deck_set.first.id %}"
+          class="group bg-white dark:bg-background-dark/50 p-6 rounded-lg shadow border border-gray-200 dark:border-gray-700 hover:bg-primary/10 transition flex flex-col justify-between"
+        >
           <div>
-            <div class="bg-primary/10 text-primary p-3 rounded-full inline-flex mb-4">
-              <svg fill="currentColor" height="24" width="24" viewBox="0 0 24 24"><path d="M5 3h14v2H5zM5 7h14v2H5zM5 11h14v2H5zM5 15h14v2H5zM5 19h14v2H5z"/></svg>
+            <div
+              class="bg-primary/10 text-primary p-3 rounded-full inline-flex mb-4"
+            >
+              <svg
+                fill="currentColor"
+                height="24"
+                width="24"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M5 3h14v2H5zM5 7h14v2H5zM5 11h14v2H5zM5 15h14v2H5zM5 19h14v2H5z"
+                />
+              </svg>
             </div>
-            <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-2 group-hover:text-primary">Sesión de estudio</h3>
-            <p class="text-gray-600 dark:text-gray-400 text-sm">Repasa tus tarjetas y pon a prueba tu memoria.</p>
+            <h3
+              class="text-xl font-semibold text-gray-900 dark:text-white mb-2 group-hover:text-primary"
+            >
+              Sesión de estudio
+            </h3>
+            <p class="text-gray-600 dark:text-gray-400 text-sm">
+              Repasa tus tarjetas de
+              <strong>{{ request.user.deck_set.first.title }}</strong> con
+              repetición espaciada.
+            </p>
           </div>
           <div class="mt-4 text-primary font-semibold">Comenzar →</div>
         </a>
-      </div>
-    </section>
-  </div>
-
-  <!-- Progreso -->
-  <div class="lg:col-span-1">
-    <section>
-      <h2 class="text-2xl font-bold mb-4 text-gray-900 dark:text-white">Tu progreso</h2>
-      <div class="space-y-4">
-        <div class="bg-white dark:bg-background-dark/50 p-6 rounded-lg">
-          <p class="text-gray-500 dark:text-gray-400">Palabras dominadas</p>
-          <p class="text-3xl font-bold mt-1">250</p>
-        </div>
-        <div class="bg-white dark:bg-background-dark/50 p-6 rounded-lg">
-          <p class="text-gray-500 dark:text-gray-400">Racha actual</p>
-          <p class="text-3xl font-bold mt-1">7 días</p>
-        </div>
+        {% else %}
+        <p class="text-gray-500">Aún no tienes decks asignados.</p>
+        {% endif %}
       </div>
     </section>
   </div>

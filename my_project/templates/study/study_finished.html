@@ -1,0 +1,14 @@
+{% extends "base_dashboard.html" %}
+{% block title %}Estudio completado{% endblock %}
+
+{% block content %}
+<div class="max-w-3xl mx-auto py-12 px-6 text-center font-display">
+  <h1 class="text-3xl font-bold text-green-600 mb-4">¡Completaste el deck!</h1>
+  <p class="text-gray-700 dark:text-gray-300 mb-6">
+    Excelente trabajo repasando todas las tarjetas de <strong>{{ deck.title }}</strong>.
+  </p>
+  <a href="{% url 'users:dashboard' %}" class="inline-block mt-4 px-6 py-3 bg-primary text-white rounded-lg font-bold hover:bg-primary/90 transition">
+    ← Volver al Dashboard
+  </a>
+</div>
+{% endblock %}

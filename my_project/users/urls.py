@@ -42,4 +42,8 @@ urlpatterns = [
              template_name='users/password_reset_complete.html'
          ),
          name='password_reset_complete'),
+    
+    path('profile/<str:username>/', views.user_profile, name='profile'),
+    
+    path('progress/', views.progress, name='progress'), 
 ]

@@ -8,10 +8,41 @@ from django.contrib.auth.tokens import default_token_generator
 from django.core.mail import send_mail
 from django.template.loader import render_to_string
 from django.contrib.sites.shortcuts import get_current_site
-
+from django.shortcuts import render, get_object_or_404
+from decks.models import Deck
 from .forms import CustomUserCreationForm, LoginForm
+from study.models import StudySession, Review
+from classes.models import UserClassProgress
+from scheduler.models import SchedulingData
+from django.utils import timezone
 
 User = get_user_model()
+
+def user_profile(request, username):
+    """
+    Muestra el perfil público de un usuario:
+      - own_decks: todos los decks del usuario perfilado
+      - public_decks_by_others: decks públicos creados por otros usuarios
+    Se usa username__iexact para evitar problemas con mayúsculas/minúsculas.
+    """
+    profile_user = get_object_or_404(User, username__iexact=username)
+
+    own_decks = Deck.objects.filter(owner=profile_user).select_related('owner').order_by('title')
+
+    public_decks_by_others = (
+        Deck.objects
+        .filter(visibility='public')
+        .exclude(owner=profile_user)
+        .select_related('owner')
+        .order_by('title')
+    )
+
+    context = {
+        "profile_user": profile_user,
+        "own_decks": own_decks,
+        "public_decks_by_others": public_decks_by_others,
+    }
+    return render(request, "users/profile.html", context)
 
 
 def home(request):
@@ -104,7 +135,69 @@ def logout_view(request):
     messages.info(request, "Has cerrado sesión.")
     return redirect('users:home')
 
-
 @login_required
 def dashboard_view(request):
-    return render(request, "users/dashboard.html")
+    user = request.user
+
+    # Ajustar la fecha local para comparaciones
+    today = timezone.localtime(timezone.now()).date()
+
+    # 1) Revisiones hechas hoy
+    reviews_today = Review.objects.filter(
+        session__user=user,
+        reviewed_at__date=today
+    ).count()
+
+    # 2) Palabras dominadas (criterio: repetitions >= 3)
+    mastered = SchedulingData.objects.filter(user=user, repetitions__gte=3).count()
+
+    # 3) Racha guardada en el user (si tienes user.streak_days)
+    streak = getattr(user, "streak_days", 0)
+
+    # 4) Progreso objetivos: ejemplo "Completar 5 lecciones diarias"
+    lessons_goal = 5
+    lessons_completed_today = UserClassProgress.objects.filter(
+        user=user,
+        completed=True,
+        completed_at__date=today
+    ).count()
+    progress_pct = min(100, int(lessons_completed_today / lessons_goal * 100)) if lessons_goal else 0
+
+    # 5) Tarjetas pendientes (due hoy)
+    pending_cards = SchedulingData.objects.filter(user=user, due_date__lte=today).count()
+
+    context = {
+        "reviews_today": reviews_today,
+        "mastered": mastered,
+        "streak": streak,
+        "lessons_goal": lessons_goal,
+        "lessons_completed_today": lessons_completed_today,
+        "progress_pct": progress_pct,
+        "pending_cards": pending_cards,
+    }
+    return render(request, "users/dashboard.html", context)
+
+
+@login_required
+def progress(request):
+    user = request.user
+    today = timezone.localtime(timezone.now()).date()
+
+    # Palabras dominadas (repetidas >= 3 veces)
+    mastered = SchedulingData.objects.filter(user=user, repetitions__gte=3).count()
+
+    # Revisiones hoy
+    reviews_today = Review.objects.filter(
+        session__user=user,
+        reviewed_at__date=today
+    ).count()
+
+    # Tarjetas pendientes
+    pending_cards = SchedulingData.objects.filter(user=user, due_date__lte=today).count()
+
+    context = {
+        'mastered': mastered,
+        'reviews_today': reviews_today,
+        'pending_cards': pending_cards,
+    }
+    return render(request, 'users/progress.html', context)
